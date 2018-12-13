@@ -17,14 +17,20 @@ def reduce_chain(chain):
     return chain
 
 
-def solution_5_1(input_path):
+def find_shortest_chain_with_single_unit_type_removed(chain):
+    possible_chars = set(chain.lower())
+    chains_w_unit_type_removed = {c: reduce_chain(chain.replace(c, '').replace(c.upper(), '')) for c in possible_chars}
+    shortest_len = len(min(chains_w_unit_type_removed.values(), key=lambda ch: len(ch)))
+    return shortest_len
+
+
+def solution_5_2(input_path):
     with open(input_path) as f:
         content = f.read()
-    reduced_chain = reduce_chain(content)
-    res = len(reduced_chain)
+    res = find_shortest_chain_with_single_unit_type_removed(content)
     return res
 
 
 if __name__ == '__main__':
-    res = solution_5_1(INPUT_PATH)
+    res = solution_5_2(INPUT_PATH)
     print(res)
