@@ -16,14 +16,6 @@ def manhattan_distance(vec1, vec2):
     return sum(abs(el_v1 - el_v2) for el_v1, el_v2 in zip(vec1, vec2))
 
 
-def normalize_cords(cords):
-    cords_xs = tuple(pt[0] for pt in cords)
-    cords_ys = tuple(pt[1] for pt in cords)
-    min_x = min(cords_xs)
-    min_y = min(cords_ys)
-    return {(pt[0] - min_x, pt[1] - min_y) for pt in cords}
-
-
 def cords_system_start_to_0_0(cords):
     cords_xs = tuple(pt[0] for pt in cords)
     cords_ys = tuple(pt[1] for pt in cords)
