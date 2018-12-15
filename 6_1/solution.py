@@ -40,9 +40,18 @@ def find_closest_points(grid, cords):
     return closest_pts_grid
 
 
+def normalize_cords(cords):
+    cords_xs = tuple(pt[0] for pt in cords)
+    cords_ys = tuple(pt[1] for pt in cords)
+    min_x = min(cords_xs)
+    min_y = min(cords_ys)
+    return {(pt[0] - min_x, pt[1] - min_y) for pt in cords}
+
+
 def count_up_closest(cords, grid_padding):
     grid_points = construct_grid(cords, grid_padding)
-    closest_pts_grid = find_closest_points(grid_points, cords)
+    cords_norm = normalize_cords(cords)
+    closest_pts_grid = find_closest_points(grid_points, cords_norm)
     closest_pts_counts = Counter(flatten_one_level(closest_pts_grid))
     del closest_pts_counts[_MULTIPLE_CLOSEST_PTS]
     return closest_pts_counts
